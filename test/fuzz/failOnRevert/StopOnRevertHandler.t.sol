@@ -118,7 +118,8 @@ contract StopOnRevertHandler is Test {
     // Aggregator //
     /////////////////////////////
     function updateCollateralPrice(uint96 newPrice, uint256 collateralSeed) public {
-        int256 intNewPrice = int256(uint256(newPrice));
+        // OracleLib rejects non-positive prices
+        int256 intNewPrice = int256(bound(uint256(newPrice), 1, type(uint96).max));
         ERC20Mock collateral = _getCollateralFromSeed(collateralSeed);
         MockV3Aggregator priceFeed = MockV3Aggregator(dscEngine.getCollateralTokenPriceFeed(address(collateral)));
 

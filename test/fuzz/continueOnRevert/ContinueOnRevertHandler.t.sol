@@ -101,7 +101,8 @@ contract ContinueOnRevertHandler is Test {
         public
     {
         // int256 intNewPrice = int256(uint256(newPrice));
-        int256 intNewPrice = 0;
+        // OracleLib rejects non-positive prices, so crash to the smallest valid price
+        int256 intNewPrice = 1;
         ERC20Mock collateral = _getCollateralFromSeed(collateralSeed);
         MockV3Aggregator priceFeed = MockV3Aggregator(dscEngine.getCollateralTokenPriceFeed(address(collateral)));
 

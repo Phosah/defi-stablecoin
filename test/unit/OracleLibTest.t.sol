@@ -32,6 +32,25 @@ contract OracleLibTest is StdCheats, Test {
         AggregatorV3Interface(address(aggregator)).staleCheckLatestRoundData();
     }
 
+    function testPriceRevertsOnZeroAnswer() public {
+        aggregator.updateAnswer(0);
+
+        vm.expectRevert(OracleLib.OracleLib__InvalidPrice.selector);
+        AggregatorV3Interface(address(aggregator)).staleCheckLatestRoundData();
+    }
+
+    function testPriceRevertsOnNegativeAnswer() public {
+        aggregator.updateAnswer(-1);
+
+        vm.expectRevert(OracleLib.OracleLib__InvalidPrice.selector);
+        AggregatorV3Interface(address(aggregator)).staleCheckLatestRoundData();
+    }
+
+    function testReturnsPositiveFreshAnswer() public {
+        (, int256 answer,,,) = AggregatorV3Interface(address(aggregator)).staleCheckLatestRoundData();
+        assertEq(answer, INITAL_PRICE);
+    }
+
     function testPriceRevertsOnBadAnsweredInRound() public {
         uint80 _roundId = 0;
         int256 _answer = 0;

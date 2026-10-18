@@ -60,8 +60,8 @@ contract MockMoreDebtDSC is ERC20Burnable, Ownable {
     }
 
     function burn(uint256 _amount) public override onlyOwner {
-        // We crash the price
-        MockV3Aggregator(mockAggregator).updateAnswer(0);
+        // We crash the price (to the smallest positive value, since OracleLib rejects 0)
+        MockV3Aggregator(mockAggregator).updateAnswer(1);
         uint256 balance = balanceOf(msg.sender);
         if (_amount <= 0) {
             revert DecentralizedStableCoin__AmountMustBeMoreThanZero();
