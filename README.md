@@ -1,6 +1,6 @@
 # Decentralized Stablecoin (DSC)
 
-[![Tests](https://github.com/<your-username>/foundry-defi-stablecoin/actions/workflows/test.yml/badge.svg)](https://github.com/<your-username>/foundry-defi-stablecoin/actions/workflows/test.yml)
+[![Tests](https://github.com/Phosah/defi-stablecoin/actions/workflows/test.yml/badge.svg)](https://github.com/Phosah/defi-stablecoin/actions/workflows/test.yml)
 
 An overcollateralized, USD-pegged stablecoin written in Solidity and tested with Foundry. Users lock crypto
 collateral (WETH, WBTC, or any configured ERC20 with a Chainlink USD feed) and mint DSC against it. Positions that fall
@@ -102,8 +102,8 @@ flowchart LR
 ## Quickstart
 
 ```bash
-git clone --recurse-submodules https://github.com/<your-username>/foundry-defi-stablecoin
-cd foundry-defi-stablecoin
+git clone --recurse-submodules https://github.com/Phosah/defi-stablecoin
+cd defi-stablecoin
 forge build
 ```
 
